@@ -5,4 +5,5 @@ import { UserModelOut } from "src/user/core/domain/models/user.model.out";
 export interface UserPersistenceOutputPort {
     saveUser(newuser: UserModelIn): Promise<UserDocument>;
     getAllUsers(): Promise<UserDocument[]>;
+    getByUserInEmail(email: string): Promise<UserDocument>
 }

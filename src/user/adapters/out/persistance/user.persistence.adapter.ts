@@ -7,14 +7,22 @@ import { UserPersistenceOutputPort } from "src/user/core/ports/out/persistance/u
 
 @Injectable()
 export class UserPersistenceAdapter implements UserPersistenceOutputPort {
-    constructor(@InjectModel(User.name) private readonly userModel: Model<User>) {}
+    constructor(@InjectModel(User.name) private readonly userModel: Model<User>) { }
 
     async saveUser(newuser: UserModelIn): Promise<UserDocument> {
         return await this.userModel.create(newuser);
-        
+
     }
     async getAllUsers(): Promise<UserDocument[]> {
         return await this.userModel.find();
     }
-    
+
+    async getByUserInEmail(value: string): Promise<UserDocument> {
+        const user = await this.userModel.findOne({ email: value });
+        if (!user) {
+            throw new Error(`User with email ${value} not found`);
+        }
+        return user;
+    }
+
 }

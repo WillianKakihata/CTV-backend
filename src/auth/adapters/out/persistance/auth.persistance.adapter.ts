@@ -2,7 +2,9 @@ import { InjectModel } from "@nestjs/mongoose";
 import { AuthPersistenceOutputPort } from "src/auth/core/ports/out/persistance/auth.persistance.output.port";
 import { Token } from "./models/token.model";
 import { Model } from "mongoose";
+import { Injectable } from "@nestjs/common";
 
+@Injectable()
 export class AuthPersistenceAdapter implements AuthPersistenceOutputPort {
   constructor(
     @InjectModel(Token.name) private readonly tokenModel: Model<Token>,

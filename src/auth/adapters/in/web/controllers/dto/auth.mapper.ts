@@ -8,7 +8,7 @@ import { SingUpUserRequest } from "./request/singup.user.request";
 export class AuthMapper {
     UserRequestToLoginUserModelIn(request: LoginUserRequest): LoginUserModelIn {
         return new LoginUserModelIn(
-            request.username,
+            request.email,
             request.password,
         );
     }
