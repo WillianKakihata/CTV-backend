@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Inject, Post } from "@nestjs/common";
+import { Body, Controller, Get, Inject, Param, Post } from "@nestjs/common";
 import { GetAllUserInputPort } from "src/user/core/ports/in/get.all.user.input.port";
 import { SaveUserInputPort } from "src/user/core/ports/in/save.user.input.port";
 import { CreateUserRequest } from "./dto/request/CreateUserRequest";
+import { GetByEmailInputPort } from "src/user/core/ports/in/get.by.email.user.input.port";
 
 @Controller('users')
 export class UserController{
@@ -9,7 +10,8 @@ export class UserController{
     private readonly saveNewUser: SaveUserInputPort
     @Inject('GetAllUserInputPort')
     private readonly getAllUsers: GetAllUserInputPort
-
+    @Inject('GetByEmailInputPort')
+    private readonly getByEmail: GetByEmailInputPort
     @Post()
     async createUser(@Body() user: CreateUserRequest) {
         return this.saveNewUser.execute(user)
@@ -19,4 +21,10 @@ export class UserController{
     async getUsers() {
         return this.getAllUsers.execute();
     }
+
+    @Get('/:email')
+     async getByEmailInUsers(@Param('email') email: string) {
+        return this.getByEmail.execute(email);
+    }
+
 }

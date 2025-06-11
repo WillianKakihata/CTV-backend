@@ -27,4 +27,14 @@ export class UserMapper {
             doc.email
         ));
     }
+
+    UserDocumentToUserModelOut(document: UserDocument): UserModelOut {
+      return new UserModelOut(
+        document.id,
+        document.firstname,
+        document.username,
+        document.email,
+      );
+    
+  }
 }
