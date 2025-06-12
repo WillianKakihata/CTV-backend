@@ -4,6 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
+import { ForumModule } from './forum/forum.module';
 
 
 @Module({
@@ -26,7 +27,8 @@ import { JwtModule } from '@nestjs/jwt';
     }),
   }),
   UserModule,
-  AuthModule
+  AuthModule,
+  ForumModule
   ],
   controllers: [],
   providers: [],
