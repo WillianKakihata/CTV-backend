@@ -29,12 +29,12 @@ export class SaveUserUseCase implements SaveUserInputPort {
             )
             try {
                 const UserDocument = await this.userPersistenceAdapter.saveUser(userToSave);
-                return this.userMapper.UserDocumentToUserModelIn(UserDocument);
+                return this.userMapper.UserDocumentToUserModelOut(UserDocument);
             } catch (error) {
                 throw new BadRequestException({message: `erro aqui`});
             }
         } catch (error) {
-            throw new BadRequestException(({message: `erro aqui`}));
+            throw new BadRequestException(({message: `erro no hash`}));
         }
 
     }

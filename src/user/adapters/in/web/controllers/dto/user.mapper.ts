@@ -5,15 +5,6 @@ import { UserModelOut } from "src/user/core/domain/models/user.model.out";
 @Injectable()
 export class UserMapper {
 
-    UserDocumentToUserModelIn(document: UserDocument): UserModelOut {
-        return new UserModelOut(
-            document.id,
-            document.firstname,
-            document.username,
-            document.email
-        );
-
-    }
 
     ArrayOfUserDocumentToUserModelOut(document: UserDocument[]): UserModelOut[] {
         if (!Array.isArray(document) || document.length === 0) {
