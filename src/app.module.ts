@@ -5,6 +5,7 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
 import { ForumModule } from './forum/forum.module';
+import { AuthGuard } from './common/guards/auth.guard';
 
 
 @Module({
@@ -31,6 +32,6 @@ import { ForumModule } from './forum/forum.module';
   ForumModule
   ],
   controllers: [],
-  providers: [],
+  providers: [AuthGuard],
 })
 export class AppModule { }
