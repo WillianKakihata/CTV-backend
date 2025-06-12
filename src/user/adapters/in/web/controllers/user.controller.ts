@@ -1,10 +1,12 @@
-import { Body, Controller, Get, Inject, Param, Post } from "@nestjs/common";
+import { Body, Controller, Get, Inject, Param, Post, UseGuards } from "@nestjs/common";
 import { GetAllUserInputPort } from "src/user/core/ports/in/get.all.user.input.port";
 import { SaveUserInputPort } from "src/user/core/ports/in/save.user.input.port";
 import { CreateUserRequest } from "./dto/request/CreateUserRequest";
 import { GetByEmailInputPort } from "src/user/core/ports/in/get.by.email.user.input.port";
+import { AuthGuard } from "src/common/guards/auth.guard";
 
 @Controller('users')
+@UseGuards(AuthGuard)
 export class UserController{
     @Inject('SaveUserInputPort')
     private readonly saveNewUser: SaveUserInputPort

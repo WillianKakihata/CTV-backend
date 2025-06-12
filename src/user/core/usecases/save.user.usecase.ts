@@ -16,10 +16,17 @@ export class SaveUserUseCase implements SaveUserInputPort {
 
     async execute(newUser: UserModelIn): Promise<UserModelOut> {
         try {
-            const hashedPassword = await bcrypt.hash(
-                newUser.password,
-                this.configService.get<string>('BCRYPT_SALT'),
-            );
+            const saltRoundsString = this.configService.get<string>('BCRYPT_SALT');
+            if (!saltRoundsString) {
+                throw new BadRequestException('BCRYPT_SALT is not defined in environment variables');
+            }
+
+            const saltRounds = parseInt(saltRoundsString, 10);
+            if (isNaN(saltRounds)) {
+                throw new BadRequestException('BCRYPT_SALT is not a valid number');
+            }
+
+            const hashedPassword = await bcrypt.hash(newUser.password, saltRounds);
 
             const userToSave = new UserModelIn(
                 newUser.firstname,
@@ -31,10 +38,10 @@ export class SaveUserUseCase implements SaveUserInputPort {
                 const UserDocument = await this.userPersistenceAdapter.saveUser(userToSave);
                 return this.userMapper.UserDocumentToUserModelOut(UserDocument);
             } catch (error) {
-                throw new BadRequestException({message: `erro aqui`});
+                throw new BadRequestException({ message: `erro aqui` });
             }
         } catch (error) {
-            throw new BadRequestException(({message: `erro no hash`}));
+            throw new BadRequestException(({ message: `erro no hash` }));
         }
 
     }
