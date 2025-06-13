@@ -4,7 +4,9 @@ import { SignUpUserInputPort } from "src/auth/core/ports/in/singup.user.input.po
 import { LoginUserRequest } from "./dto/request/login.user.request";
 import { AuthMapper } from "./dto/auth.mapper";
 import { SingUpUserRequest } from "./dto/request/singup.user.request";
+import { ApiBearerAuth } from "@nestjs/swagger";
 
+@ApiBearerAuth('auth')
 @Controller('auth')
 export class AuthController {
     constructor(

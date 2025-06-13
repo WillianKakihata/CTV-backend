@@ -4,8 +4,10 @@ import { SaveUserInputPort } from "src/user/core/ports/in/save.user.input.port";
 import { CreateUserRequest } from "./dto/request/CreateUserRequest";
 import { GetByEmailInputPort } from "src/user/core/ports/in/get.by.email.user.input.port";
 import { AuthGuard } from "src/common/guards/auth.guard";
+import { ApiBearerAuth } from "@nestjs/swagger";
 
 @Controller('users')
+@ApiBearerAuth('users')
 @UseGuards(AuthGuard)
 export class UserController{
     @Inject('SaveUserInputPort')

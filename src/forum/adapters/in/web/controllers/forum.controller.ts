@@ -5,7 +5,9 @@ import { GetByEmailInputPort } from "src/user/core/ports/in/get.by.email.user.in
 import { CreatePostRequest } from "./dto/request/create.post.request";
 import { SavePostInputPort } from "src/forum/core/ports/in/web/controllers/save.post.input.port";
 import { AuthGuard } from "src/common/guards/auth.guard";
+import { ApiBearerAuth } from "@nestjs/swagger";
 
+@ApiBearerAuth('forum')
 @UseGuards(AuthGuard)
 @Controller('forum')
 export class ForumController{
