@@ -16,17 +16,10 @@ export class SaveUserUseCase implements SaveUserInputPort {
 
     async execute(newUser: UserModelIn): Promise<UserModelOut> {
         try {
-            const saltRoundsString = this.configService.get<string>('BCRYPT_SALT');
-            if (!saltRoundsString) {
-                throw new BadRequestException('BCRYPT_SALT is not defined in environment variables');
-            }
-
-            const saltRounds = parseInt(saltRoundsString, 10);
-            if (isNaN(saltRounds)) {
-                throw new BadRequestException('BCRYPT_SALT is not a valid number');
-            }
-
-            const hashedPassword = await bcrypt.hash(newUser.password, saltRounds);
+            const hashedPassword = await bcrypt.hash(
+                newUser.password,
+                this.configService.get<string>('BCRYPT_SALT'),
+            );
 
             const userToSave = new UserModelIn(
                 newUser.firstname,

@@ -1,6 +1,8 @@
+import { ApiProperty } from "@nestjs/swagger";
 import { IsEmail, IsString, Matches, MinLength } from "class-validator";
 
 export class CreateUserRequest {
+    @ApiProperty()
     @IsString({ message: 'first name must be a string' })
     @Matches(/^[A-Za-z]+$/, {
         message:
@@ -9,6 +11,7 @@ export class CreateUserRequest {
     @MinLength(2, { message: 'First name must be at least 2 characters long' })
     public firstname: string;
 
+    @ApiProperty()
     @IsString({ message: ' username must be a string' })
     @Matches(/^[A-Za-z]+$/, {
         message:
@@ -17,10 +20,11 @@ export class CreateUserRequest {
     @MinLength(2, { message: 'Username must be at least 2 characters long' })
     public username: string;
 
+    @ApiProperty()
     @IsString({ message: 'Email must be a string' })
     @IsEmail({}, { message: 'Email must be a valid email address' })
     public email: string;
-
+    @ApiProperty()
     @Matches(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
         {
