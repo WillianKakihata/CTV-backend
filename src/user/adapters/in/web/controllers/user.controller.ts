@@ -7,7 +7,7 @@ import { AuthGuard } from "src/common/guards/auth.guard";
 import { ApiBearerAuth } from "@nestjs/swagger";
 
 @Controller('users')
-@ApiBearerAuth('users')
+@ApiBearerAuth()
 @UseGuards(AuthGuard)
 export class UserController{
     @Inject('SaveUserInputPort')
