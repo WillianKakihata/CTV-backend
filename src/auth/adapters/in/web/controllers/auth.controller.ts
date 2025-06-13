@@ -6,7 +6,7 @@ import { AuthMapper } from "./dto/auth.mapper";
 import { SingUpUserRequest } from "./dto/request/singup.user.request";
 import { ApiBearerAuth } from "@nestjs/swagger";
 
-@ApiBearerAuth('auth')
+@ApiBearerAuth()
 @Controller('auth')
 export class AuthController {
     constructor(
