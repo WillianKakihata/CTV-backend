@@ -7,7 +7,7 @@ import { SavePostInputPort } from "src/forum/core/ports/in/web/controllers/save.
 import { AuthGuard } from "src/common/guards/auth.guard";
 import { ApiBearerAuth } from "@nestjs/swagger";
 
-@ApiBearerAuth('forum')
+@ApiBearerAuth()
 @UseGuards(AuthGuard)
 @Controller('forum')
 export class ForumController{
