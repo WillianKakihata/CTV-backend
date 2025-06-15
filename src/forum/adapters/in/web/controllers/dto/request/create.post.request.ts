@@ -16,8 +16,10 @@ export class CreatePostRequest {
     @MinLength(5, { message: 'Description must be at least 5 characters long' })
     public description: string;
 
+    @IsString({ message: 'deve ter um endereco ' })
+    public adress: string;
+
     @ApiProperty({type: String})
     @IsString({ message: 'Image must be a string' })
-    @IsNotEmpty({ message: 'Image URL cannot be empty' })
-    public image: string;
+    public image?: string;
 }

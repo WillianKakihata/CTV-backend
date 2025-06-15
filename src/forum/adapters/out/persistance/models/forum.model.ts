@@ -14,6 +14,9 @@ export class Forum {
     description: string;
 
     @Prop({required: true})
+    public adress: string;
+
+    @Prop({required: true})
     image: string;
 }
 
